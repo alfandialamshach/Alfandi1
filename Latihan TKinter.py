@@ -1,6 +1,6 @@
 import tkinter as tk
 import sqlite3 
-from PIL import ImageTk
+from tkinter import messagebox
 
 def hasil_prediksi():
     # Mendapatkan nilai dari input
@@ -55,7 +55,7 @@ def hasil_prediksi():
     hasil.config(text=f"Prodi Pilihan: {hasil_fakultas}")
 
     # Menyimpan data ke SQLite
-    conn = sqlite3.connect('prediksi_fakultas_.db')
+    conn = sqlite3.connect('PrediksiMatakuliah.db')
     cursor = conn.cursor()
     cursor.execute('''CREATE TABLE IF NOT EXISTS prediksi_fakultas (
                         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -80,7 +80,7 @@ def hasil_prediksi():
                     nilai_Sipil, hasil_fakultas))
     conn.commit()
     conn.close()
-
+messagebox.showinfo("Info","Data berhasil disimpan dengan baik")
 # Membuat jendela Tkinter
 root = tk.Tk()
 root.title("Aplikasi Prediksi Prodi Pilihan")
@@ -89,12 +89,6 @@ root.geometry("500x600")  # Mengatur ukuran jendela
 # Label judul
 label_judul = tk.Label(root, text="Aplikasi Prediksi Prodi Pilihan", font=("Arial", 16))
 label_judul.pack(pady=10)
-
-# Menambahkan gambar
-image = Image.open("Logo.PNG")
-photo_image = ImageTk.PhotoImage(image)
-label_logo = tk.Label(root, image=photo_image)
-label_logo.pack(pady=10)
 
 # Input nilai mata pelajaran
 label_nama = tk.Label(root, text="Nama Siswa: ")
